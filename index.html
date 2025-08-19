@@ -16,8 +16,8 @@
     :root{
       --bg: #ffffff;
       --text: #000000;
-      --header-bg: #111111;
-      --header-text: #ffffff;
+      --header-bg: #f0f0f0;  /* Fundo claro para o header */
+      --header-text: #000000; /* Texto escuro para contrastar */
 
       --agenda-bg: #f2f2f2;
       --sistema-border: #cccccc;
@@ -28,8 +28,8 @@
       --sessao-bg: #eaeaea;
       --sessao-border: #bbbbbb;
 
-      --footer-bg: #111111;
-      --footer-text: #ffffff;
+      --footer-bg: #f0f0f0;   /* Fundo claro para o footer */
+      --footer-text: #000000; /* Texto escuro para contrastar */
 
       --whatsapp: #075E54;        /* verde escuro */
       --whatsapp-hover: #064c44;
@@ -41,8 +41,8 @@
     body.dark{
       --bg: #0e0e12;
       --text: #f5f5f5;
-      --header-bg: #0b0b0e;
-      --header-text: #ffffff;
+      --header-bg: #0b0b0e;   /* Mantém o escuro original */
+      --header-text: #ffffff;  /* Mantém o claro original */
 
       --agenda-bg: #15151b;
       --sistema-border: #2a2a2f;
@@ -53,8 +53,8 @@
       --sessao-bg: #1e1e29;
       --sessao-border: #30303a;
 
-      --footer-bg: #0b0b0e;
-      --footer-text: #ffffff;
+      --footer-bg: #0b0b0e;   /* Mantém o escuro original */
+      --footer-text: #ffffff;  /* Mantém o claro original */
 
       --whatsapp: #0c5b50;        /* mantém escuro no dark */
       --whatsapp-hover: #0a4a41;
@@ -86,6 +86,7 @@
 
     .feedbacks { margin: 40px auto; max-width: 600px; font-style: italic; font-size: 1.1rem; }
     .footer { margin-top: 40px; padding: 15px; background: var(--footer-bg); color: var(--footer-text); font-size: 0.9rem; }
+    .theme-toggle { width: 40px; height: 40px;  border-radius: 50%;  display: flex;  align-items: center;  justify-content: center;  margin-left: 12px;
   </style>
 </head>
 <body>
@@ -94,9 +95,9 @@
     <a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
       <i class="fab fa-whatsapp"></i> Chama
     </a>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
-      <i id="themeIcon" class="fas fa-sun"></i> <span id="themeLabel">Claro</span>
-    </button>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
+  <i id="themeIcon" class="fas fa-moon"></i>
+</button>
   </header>
 
   <h1>Mesas</h1>
@@ -112,19 +113,21 @@
 
   <script>
     /* ===== Tema claro/escuro ===== */
-    function aplicarTema(tema){
-      const isDark = (tema === 'dark');
-      document.body.classList.toggle('dark', isDark);
-      localStorage.setItem('tema', tema);
+function aplicarTema(tema){
+  const isDark = (tema === 'dark');
+  document.body.classList.toggle('dark', isDark);
+  localStorage.setItem('tema', tema);
       const icon = document.getElementById('themeIcon');
-      const label = document.getElementById('themeLabel');
-      if(isDark){
-        icon.className = 'fas fa-moon';
-        label.textContent = 'Escuro';
-      }else{
-        icon.className = 'fas fa-sun';
-        label.textContent = 'Claro';
+  const icon = document.getElementById('themeIcon');
+  if(isDark){
+    icon.className = 'fas fa-sun';
+  }else{
+    icon.className = 'fas fa-moon';
       }
+   const headerImg = document.querySelector('header img');
+  if (headerImg) {
+    headerImg.src = isDark ? 'raposo-1.webp' : 'raposo-2.webp';
+  }
     }
 
     function toggleTheme(){
