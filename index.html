@@ -94,8 +94,8 @@
     <a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
       <i class="fab fa-whatsapp"></i> Chama
     </a>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
-      <i id="themeIcon" class="fas fa-sun"></i>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
+      <i id="themeIcon" class="fas fa-sun"></i> <span id="themeLabel">Claro</span>
     </button>
   </header>
 
@@ -120,10 +120,13 @@
       localStorage.setItem('tema', tema);
       // UI do botão
       const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
       if(isDark){
         icon.className = 'fas fa-moon';
+        label.textContent = 'Escuro';
       }else{
         icon.className = 'fas fa-sun';
+        label.textContent = 'Claro';
       }
     }
     function toggleTheme(){
