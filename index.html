@@ -8,40 +8,95 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="raposo-1.webp">
 
-  <!-- Ícones do Font Awesome (para o WhatsApp e setas) -->
+  <!-- Ícones do Font Awesome (para WhatsApp e sol/lua) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Estilos -->
   <style>
-    body { font-family: Arial, sans-serif; background: #fff; color: #000; text-align: center; margin: 0; }
-    header { padding: 20px; background: #111; }
+    /* Paleta via variáveis (claro) */
+    :root{
+      --bg: #ffffff;
+      --text: #000000;
+      --header-bg: #111111;
+      --header-text: #ffffff;
+
+      --agenda-bg: #f2f2f2;
+      --sistema-border: #cccccc;
+      --sistema-header-bg: #dddddd;
+      --sistema-header-hover: #cccccc;
+      --sistema-content-bg: #f7f7f7;
+
+      --sessao-bg: #eaeaea;
+      --sessao-border: #bbbbbb;
+
+      --footer-bg: #111111;
+      --footer-text: #ffffff;
+
+      --whatsapp: #075E54;        /* verde escuro */
+      --whatsapp-hover: #064c44;
+      --toggle-bg: #e0e0e0;
+      --toggle-text: #000000;
+    }
+
+    /* Tema escuro (sobrescreve) */
+    body.dark{
+      --bg: #0e0e12;
+      --text: #f5f5f5;
+      --header-bg: #0b0b0e;
+      --header-text: #ffffff;
+
+      --agenda-bg: #15151b;
+      --sistema-border: #2a2a2f;
+      --sistema-header-bg: #1b1b22;
+      --sistema-header-hover: #23232b;
+      --sistema-content-bg: #171721;
+
+      --sessao-bg: #1e1e29;
+      --sessao-border: #30303a;
+
+      --footer-bg: #0b0b0e;
+      --footer-text: #ffffff;
+
+      --whatsapp: #0c5b50;        /* mantém escuro no dark */
+      --whatsapp-hover: #0a4a41;
+      --toggle-bg: #2a2a2f;
+      --toggle-text: #f5f5f5;
+    }
+
+    /* Base */
+    body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); text-align: center; margin: 0; transition: background .25s, color .25s; }
+    header { padding: 20px; background: var(--header-bg); color: var(--header-text); }
     header img { max-height: 80px; }
     h1 { margin-top: 20px; }
 
-    .agenda { max-width: 800px; margin: 40px auto; text-align: left; background: #f2f2f2; padding: 20px; border-radius: 10px; }
-    .sistema { margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; }
-    .sistema-header { cursor: pointer; padding: 12px; font-weight: bold; background: #ddd; display: flex; align-items: center; justify-content: space-between; }
-    .sistema-header:hover { background: #ccc; }
+    .agenda { max-width: 800px; margin: 40px auto; text-align: left; background: var(--agenda-bg); padding: 20px; border-radius: 10px; }
+    .sistema { margin-bottom: 20px; border: 1px solid var(--sistema-border); border-radius: 6px; background: var(--sistema-content-bg); }
+    .sistema-header { cursor: pointer; padding: 12px; font-weight: bold; background: var(--sistema-header-bg); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--sistema-border); }
+    .sistema-header:hover { background: var(--sistema-header-hover); }
     .sistema-conteudo { display: none; padding: 15px; }
 
-    .sessao { margin-bottom: 15px; padding: 10px; border: 1px solid #bbb; border-radius: 6px; background: #eaeaea; }
+    .sessao { margin-bottom: 15px; padding: 10px; border: 1px solid var(--sessao-border); border-radius: 6px; background: var(--sessao-bg); }
     .sessao h3 { margin: 0 0 5px; }
 
-    .whatsapp-btn { display: inline-block; margin-top: 20px; padding: 12px 18px; background: #075E54; color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.1rem; }
+    .whatsapp-btn { display: inline-block; margin-top: 16px; padding: 12px 18px; background: var(--whatsapp); color: #fff; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.05rem; transition: background .2s; }
     .whatsapp-btn i { margin-right: 8px; }
-    .whatsapp-btn:hover { background: #064c44; }
+    .whatsapp-btn:hover { background: var(--whatsapp-hover); }
+
+    .theme-toggle { margin-left: 12px; padding: 10px 14px; border: none; border-radius: 8px; background: var(--toggle-bg); color: var(--toggle-text); font-weight: bold; cursor: pointer; transition: opacity .2s; }
+    .theme-toggle:hover { opacity: .9; }
 
     .feedbacks { margin: 40px auto; max-width: 600px; font-style: italic; font-size: 1.1rem; }
-    .footer { margin-top: 40px; padding: 15px; background: #111; color: #fff; font-size: 0.9rem; }
+    .footer { margin-top: 40px; padding: 15px; background: var(--footer-bg); color: var(--footer-text); font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <header>
-    <img src="raposo-1.webp" alt="Raposo EL">
-    <br>
+    <img src="raposo-1.webp" alt="Raposo EL"><br>
     <a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
       <i class="fab fa-whatsapp"></i> Chama no WhatsApp
     </a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
+      <i id="themeIcon" class="fas fa-sun"></i> <span id="themeLabel">Claro</span>
+    </button>
   </header>
 
   <h1>Mesas</h1>
@@ -58,6 +113,38 @@
   </div>
 
   <script>
+    /* ===== Tema claro/escuro ===== */
+    function aplicarTema(tema){
+      const isDark = (tema === 'dark');
+      document.body.classList.toggle('dark', isDark);
+      localStorage.setItem('tema', tema);
+      // UI do botão
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if(isDark){
+        icon.className = 'fas fa-moon';
+        label.textContent = 'Escuro';
+      }else{
+        icon.className = 'fas fa-sun';
+        label.textContent = 'Claro';
+      }
+    }
+    function toggleTheme(){
+      aplicarTema(document.body.classList.contains('dark') ? 'light' : 'dark');
+    }
+    // Preferência salva > preferência do sistema > claro
+    (function initTheme(){
+      const salvo = localStorage.getItem('tema');
+      if(salvo){
+        aplicarTema(salvo);
+      }else{
+        const prefereEscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        aplicarTema(prefereEscuro ? 'dark' : 'light');
+      }
+      document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    })();
+
+    /* ===== Dados / Agenda ===== */
     const sistemas = {
       "Tormenta20": [
         { nome: "Guerra Artoniana", data: "2025-08-20", hora: "19h30~23h30", freq: "semanal", vagas: 2 },
@@ -76,8 +163,7 @@
     function calcularProximaSessao(dataInicial, freq) {
       let hoje = new Date();
       let proxima = new Date(dataInicial);
-      let dias = (freq === "semanal") ? 7 : 14;
-
+      const dias = (freq === "semanal") ? 7 : 14;
       while (proxima < hoje) {
         proxima.setDate(proxima.getDate() + dias);
       }
@@ -89,11 +175,11 @@
     }
 
     function renderizarAgenda() {
-      let agendaDiv = document.getElementById("agenda");
+      const agendaDiv = document.getElementById("agenda");
       agendaDiv.innerHTML = "";
 
       for (let sistema in sistemas) {
-        let id = sistema.replace(/\s+/g, "_"); // ID seguro
+        const id = sistema.replace(/\s+/g, "_");
         agendaDiv.innerHTML += `
           <div class="sistema">
             <div class="sistema-header" onclick="toggleSistema('${id}')">
@@ -104,9 +190,10 @@
           </div>
         `;
 
+        // monta o conteúdo imediatamente (sem depender de DOMContentLoaded)
         let conteudo = "";
         sistemas[sistema].forEach(mesa => {
-          let proximaData = calcularProximaSessao(mesa.data, mesa.freq);
+          const proximaData = calcularProximaSessao(mesa.data, mesa.freq);
           conteudo += `
             <div class="sessao">
               <h3>${mesa.nome}</h3>
@@ -116,15 +203,14 @@
             </div>
           `;
         });
-        document.addEventListener("DOMContentLoaded", () => {
-          document.getElementById(id).innerHTML = conteudo;
-        });
+        // injeta no container recém-criado
+        document.getElementById(id).innerHTML = conteudo;
       }
     }
 
     function toggleSistema(id) {
-      let conteudo = document.getElementById(id);
-      let icone = document.getElementById("icon-" + id);
+      const conteudo = document.getElementById(id);
+      const icone = document.getElementById("icon-" + id);
       if (conteudo.style.display === "block") {
         conteudo.style.display = "none";
         icone.classList.remove("fa-chevron-down");
@@ -151,6 +237,7 @@
     setInterval(mostrarFeedback, 4000);
     mostrarFeedback();
 
+    // Render
     renderizarAgenda();
   </script>
 </body>
