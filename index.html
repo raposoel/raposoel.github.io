@@ -5,31 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raposo EL RPG</title>
 
-  <!-- Favicon (logo na aba) -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="raposo-1.webp">
 
-  <!-- Estilos básicos -->
+  <!-- Ícones do Font Awesome (para o WhatsApp e setas) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Estilos -->
   <style>
-    body { font-family: Arial, sans-serif; background: #1e1e2f; color: #f5f5f5; text-align: center; }
-    header { padding: 20px; background: #2a2a40; }
-    .agenda { max-width: 600px; margin: 40px auto; text-align: left; background: #2e2e44; padding: 20px; border-radius: 10px; }
-    .sessao { margin-bottom: 15px; padding: 10px; border: 1px solid #444; border-radius: 6px; background: #3a3a55; }
-    .whatsapp-btn { display: inline-block; margin-top: 20px; padding: 12px 18px; background: #25D366; color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.1rem; }
-    .whatsapp-btn:hover { background: #1da851; }
+    body { font-family: Arial, sans-serif; background: #fff; color: #000; text-align: center; margin: 0; }
+    header { padding: 20px; background: #111; }
+    header img { max-height: 80px; }
+    h1 { margin-top: 20px; }
+
+    .agenda { max-width: 800px; margin: 40px auto; text-align: left; background: #f2f2f2; padding: 20px; border-radius: 10px; }
+    .sistema { margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; }
+    .sistema-header { cursor: pointer; padding: 12px; font-weight: bold; background: #ddd; display: flex; align-items: center; justify-content: space-between; }
+    .sistema-header:hover { background: #ccc; }
+    .sistema-conteudo { display: none; padding: 15px; }
+
+    .sessao { margin-bottom: 15px; padding: 10px; border: 1px solid #bbb; border-radius: 6px; background: #eaeaea; }
+    .sessao h3 { margin: 0 0 5px; }
+
+    .whatsapp-btn { display: inline-block; margin-top: 20px; padding: 12px 18px; background: #075E54; color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.1rem; }
+    .whatsapp-btn i { margin-right: 8px; }
+    .whatsapp-btn:hover { background: #064c44; }
+
+    .feedbacks { margin: 40px auto; max-width: 600px; font-style: italic; font-size: 1.1rem; }
+    .footer { margin-top: 40px; padding: 15px; background: #111; color: #fff; font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <header>
-    <!-- Troque "logo.png" pela imagem do seu logo -->
     <img src="raposo-1.webp" alt="Raposo EL">
-
-        <!-- Botão WhatsApp -->
-    <br><a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
-      Chama no WhatsApp
-       </a>
+    <br>
+    <a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
+      <i class="fab fa-whatsapp"></i> Chama no WhatsApp
+    </a>
   </header>
+
   <h1>Mesas</h1>
- <section class="agenda" id="agenda"></section>
+  <section class="agenda" id="agenda"></section>
+
+  <!-- Espaço de feedbacks -->
+  <div class="feedbacks">
+    <p id="feedback"></p>
+  </div>
+
+  <!-- Rodapé -->
+  <div class="footer">
+    <p>&copy; 2025 Raposo EL RPG. Todos os direitos reservados.</p>
+  </div>
+
   <script>
     const sistemas = {
       "Tormenta20": [
@@ -63,33 +90,68 @@
 
     function renderizarAgenda() {
       let agendaDiv = document.getElementById("agenda");
-      agendaDiv.innerHTML = "<h2>Próximas Sessões</h2>";
+      agendaDiv.innerHTML = "";
 
-      // percorre sistemas
       for (let sistema in sistemas) {
-        agendaDiv.innerHTML += `<div class="sistema"><h2>${sistema}</h2>`;
+        let id = sistema.replace(/\s+/g, "_"); // ID seguro
+        agendaDiv.innerHTML += `
+          <div class="sistema">
+            <div class="sistema-header" onclick="toggleSistema('${id}')">
+              <span>${sistema}</span>
+              <i id="icon-${id}" class="fas fa-chevron-right"></i>
+            </div>
+            <div id="${id}" class="sistema-conteudo"></div>
+          </div>
+        `;
 
-        // percorre mesas de cada sistema
+        let conteudo = "";
         sistemas[sistema].forEach(mesa => {
           let proximaData = calcularProximaSessao(mesa.data, mesa.freq);
-          agendaDiv.innerHTML += `
+          conteudo += `
             <div class="sessao">
               <h3>${mesa.nome}</h3>
-              <p><strong>Próxima Sessão:</strong> ${formatarData(proximaData)}</p>
-              <p><strong>Horário:</strong> ${mesa.hora}</p>
+              <p><strong>Próxima Sessão:</strong> ${formatarData(proximaData)} às ${mesa.hora}</p>
               <p><strong>Frequência:</strong> ${mesa.freq}</p>
               <p><strong>Vagas:</strong> ${mesa.vagas} disponíveis</p>
             </div>
           `;
         });
-
-        agendaDiv.innerHTML += `</div>`;
+        document.addEventListener("DOMContentLoaded", () => {
+          document.getElementById(id).innerHTML = conteudo;
+        });
       }
     }
 
+    function toggleSistema(id) {
+      let conteudo = document.getElementById(id);
+      let icone = document.getElementById("icon-" + id);
+      if (conteudo.style.display === "block") {
+        conteudo.style.display = "none";
+        icone.classList.remove("fa-chevron-down");
+        icone.classList.add("fa-chevron-right");
+      } else {
+        conteudo.style.display = "block";
+        icone.classList.remove("fa-chevron-right");
+        icone.classList.add("fa-chevron-down");
+      }
+    }
+
+    // Feedbacks rotativos
+    const feedbacks = [
+      "“Uma das melhores experiências de RPG que já tive!”",
+      "“Narrativa envolvente e organização impecável.”",
+      "“O mestre sabe equilibrar diversão e desafio.”",
+      "“Cada sessão parece um episódio de série.”"
+    ];
+    let index = 0;
+    function mostrarFeedback() {
+      document.getElementById("feedback").innerText = feedbacks[index];
+      index = (index + 1) % feedbacks.length;
+    }
+    setInterval(mostrarFeedback, 4000);
+    mostrarFeedback();
+
     renderizarAgenda();
   </script>
-    </a>
-  </section>
 </body>
 </html>
