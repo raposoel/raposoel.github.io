@@ -33,13 +33,13 @@
   <script>
     const sistemas = {
       "Tormenta20": [
-        { nome: "Guerra Artoniana", data: "2025-08-19", freq: "semanal", vagas: 2 },
-        { nome: "Guerra Artoniana", data: "2025-08-21", freq: "semanal", vagas: 2 },
-        { nome: "Libertação de Valkaria", data: "2025-08-20", freq: "quinzenal", vagas: 0 }
+        { nome: "Guerra Artoniana", data: "2025-08-20", freq: "semanal", vagas: 2 },
+        { nome: "Guerra Artoniana", data: "2025-08-22", freq: "semanal", vagas: 2 },
+        { nome: "Libertação de Valkaria", data: "2025-08-21", freq: "quinzenal", vagas: 0 }
       ],
       "Daggerheart": [
-        { nome: "A G O U R O (Era da Umbra)", data: "2025-08-22", freq: "quinzenal", vagas: 1 },
-        { nome: "GAMBiARRA (Placa-Mãe)", data: "2025-08-25", freq: "quinzenal", vagas: 1 }
+        { nome: "A G O U R O (Era da Umbra)", data: "2025-08-23", freq: "quinzenal", vagas: 1 },
+        { nome: "GAMBiARRA (Placa-Mãe)", data: "2025-08-26", freq: "quinzenal", vagas: 1 }
       ]
     };
 
@@ -55,7 +55,7 @@
     }
 
     function formatarData(data) {
-      return data.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit", year: "numeric" });
+      return data.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit", year: "2-digit" });
     }
 
     function renderizarAgenda() {
