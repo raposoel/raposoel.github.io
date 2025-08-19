@@ -64,13 +64,13 @@
 
     /* Base */
     body { 
-      font-family: Arial, sans-serif; 
+      font-family: Overpass, sans-serif; 
       background: var(--bg); 
       color: var(--text); 
       text-align: center; 
       margin: 0; 
       transition: background .25s, color .25s; 
-      padding-top: 100px; /* Espaço para o header fixo */
+      padding-top: 180px; /* Espaço para o header fixo */
     }
     header { 
       position: fixed;
@@ -203,7 +203,7 @@
     /* Responsividade */
     @media (max-width: 768px) {
       body {
-        padding-top: 120px;
+        padding-top: 200px;
       }
       
       header {
@@ -211,9 +211,12 @@
       }
       
       header img {
-        max-height: 50px;
+        max-height: 120px;
       }
-      
+      @media (max-width: 480px) {
+  header img {
+    max-height: 100px; /* Aumentado proporcionalmente */
+  }
       .floating-theme {
         top: 15px;
         right: 15px;
