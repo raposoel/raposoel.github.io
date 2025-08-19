@@ -16,8 +16,8 @@
     :root{
       --bg: #ffffff;
       --text: #000000;
-      --header-bg: #f0f0f0;  /* Fundo claro para o header */
-      --header-text: #000000; /* Texto escuro para contrastar */
+      --header-bg: #f0f0f0;
+      --header-text: #000000;
 
       --agenda-bg: #f2f2f2;
       --sistema-border: #cccccc;
@@ -28,10 +28,10 @@
       --sessao-bg: #eaeaea;
       --sessao-border: #bbbbbb;
 
-      --footer-bg: #f0f0f0;   /* Fundo claro para o footer */
-      --footer-text: #000000; /* Texto escuro para contrastar */
+      --footer-bg: #f0f0f0;
+      --footer-text: #000000;
 
-      --whatsapp: #075E54;        /* verde escuro */
+      --whatsapp: #075E54;
       --whatsapp-hover: #064c44;
       --toggle-bg: #e0e0e0;
       --toggle-text: #000000;
@@ -41,8 +41,8 @@
     body.dark{
       --bg: #0e0e12;
       --text: #f5f5f5;
-      --header-bg: #0b0b0e;   /* Mantém o escuro original */
-      --header-text: #ffffff;  /* Mantém o claro original */
+      --header-bg: #0b0b0e;
+      --header-text: #ffffff;
 
       --agenda-bg: #15151b;
       --sistema-border: #2a2a2f;
@@ -53,88 +53,248 @@
       --sessao-bg: #1e1e29;
       --sessao-border: #30303a;
 
-      --footer-bg: #0b0b0e;   /* Mantém o escuro original */
-      --footer-text: #ffffff;  /* Mantém o claro original */
+      --footer-bg: #0b0b0e;
+      --footer-text: #ffffff;
 
-      --whatsapp: #0c5b50;        /* mantém escuro no dark */
+      --whatsapp: #0c5b50;
       --whatsapp-hover: #0a4a41;
       --toggle-bg: #2a2a2f;
       --toggle-text: #f5f5f5;
     }
 
     /* Base */
-    body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); text-align: center; margin: 0; transition: background .25s, color .25s; }
-    header { padding: 20px; background: var(--header-bg); color: var(--header-text); }
-    header img { max-height: 80px; }
+    body { 
+      font-family: Arial, sans-serif; 
+      background: var(--bg); 
+      color: var(--text); 
+      text-align: center; 
+      margin: 0; 
+      transition: background .25s, color .25s; 
+      padding-top: 100px; /* Espaço para o header fixo */
+    }
+    header { 
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 15px 20px; 
+      background: var(--header-bg); 
+      color: var(--header-text); 
+      transition: background .25s, color .25s;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .header-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+    header img { 
+      max-height: 60px; 
+      transition: transform 0.3s ease;
+      margin-bottom: 10px;
+    }
     h1 { margin-top: 20px; }
 
-    .agenda { max-width: 800px; margin: 40px auto; text-align: left; background: var(--agenda-bg); padding: 20px; border-radius: 10px; }
-    .sistema { margin-bottom: 20px; border: 1px solid var(--sistema-border); border-radius: 6px; background: var(--sistema-content-bg); }
-    .sistema-header { cursor: pointer; padding: 12px; font-weight: bold; background: var(--sistema-header-bg); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--sistema-border); }
+    .agenda { 
+      max-width: 800px; 
+      margin: 40px auto; 
+      text-align: left; 
+      background: var(--agenda-bg); 
+      padding: 20px; 
+      border-radius: 10px; 
+    }
+    .sistema { 
+      margin-bottom: 20px; 
+      border: 1px solid var(--sistema-border); 
+      border-radius: 6px; 
+      background: var(--sistema-content-bg); 
+    }
+    .sistema-header { 
+      cursor: pointer; 
+      padding: 12px; 
+      font-weight: bold; 
+      background: var(--sistema-header-bg); 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      border-bottom: 1px solid var(--sistema-border); 
+    }
     .sistema-header:hover { background: var(--sistema-header-hover); }
     .sistema-conteudo { display: none; padding: 15px; }
 
-    .sessao { margin-bottom: 15px; padding: 10px; border: 1px solid var(--sessao-border); border-radius: 6px; background: var(--sessao-bg); }
+    .sessao { 
+      margin-bottom: 15px; 
+      padding: 10px; 
+      border: 1px solid var(--sessao-border); 
+      border-radius: 6px; 
+      background: var(--sessao-bg); 
+    }
     .sessao h3 { margin: 0 0 5px; }
 
-    .whatsapp-btn { display: inline-block; margin-top: 16px; padding: 12px 18px; background: var(--whatsapp); color: #fff; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.05rem; transition: background .2s; }
+    .whatsapp-btn { 
+      display: inline-block; 
+      margin-top: 10px; 
+      padding: 12px 18px; 
+      background: var(--whatsapp); 
+      color: #fff; 
+      font-weight: bold; 
+      border-radius: 8px; 
+      text-decoration: none; 
+      font-size: 1.05rem; 
+      transition: all .3s ease; 
+      z-index: 1001;
+    }
     .whatsapp-btn i { margin-right: 8px; }
-    .whatsapp-btn:hover { background: var(--whatsapp-hover); }
+    .whatsapp-btn:hover { 
+      background: var(--whatsapp-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
 
-    .theme-toggle { margin-left: 12px; padding: 10px 14px; border: none; border-radius: 8px; background: var(--toggle-bg); color: var(--toggle-text); font-weight: bold; cursor: pointer; transition: opacity .2s; }
-    .theme-toggle:hover { opacity: .9; }
+    /* Botão de tema flutuante */
+    .floating-theme {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      border: none; 
+      border-radius: 50%; 
+      background: var(--toggle-bg); 
+      color: var(--toggle-text); 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002; /* Acima de tudo */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .floating-theme:hover { 
+      opacity: .9; 
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
 
-    .feedbacks { margin: 40px auto; max-width: 600px; font-style: italic; font-size: 1.1rem; }
-    .footer { margin-top: 40px; padding: 15px; background: var(--footer-bg); color: var(--footer-text); font-size: 0.9rem; }
-    .theme-toggle { width: 40px; height: 40px;  border-radius: 50%;  display: flex;  align-items: center;  justify-content: center;  margin-left: 12px;
+    .feedbacks { 
+      margin: 40px auto; 
+      max-width: 600px; 
+      font-style: italic; 
+      font-size: 1.1rem; 
+    }
+    .footer { 
+      margin-top: 40px; 
+      padding: 15px; 
+      background: var(--footer-bg); 
+      color: var(--footer-text); 
+      font-size: 0.9rem; 
+      transition: background .25s, color .25s;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 120px;
+      }
+      
+      header {
+        padding: 10px 15px;
+      }
+      
+      header img {
+        max-height: 50px;
+      }
+      
+      .floating-theme {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .whatsapp-btn {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .floating-theme {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .floating-theme i {
+        font-size: 18px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="raposo-1.webp" alt="Raposo EL"><br>
-    <a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
-      <i class="fab fa-whatsapp"></i> Chama
-    </a>
-<button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
-  <i id="themeIcon" class="fas fa-moon"></i>
-</button>
+    <div class="header-content">
+      <img src="raposo-1.webp" alt="Raposo EL" id="headerLogo">
+      <a class="whatsapp-btn" href="https://wa.me/5512992303459?text=Olá. Quero jogar RPG com você." target="_blank">
+        <i class="fab fa-whatsapp"></i> Chama
+      </a>
+    </div>
   </header>
+
+  <!-- Botão de tema flutuante -->
+  <button class="floating-theme" id="floatingThemeToggle" title="Alternar tema claro/escuro">
+    <i id="floatingThemeIcon" class="fas fa-moon"></i>
+  </button>
 
   <h1>Mesas</h1>
   <section class="agenda" id="agenda"></section>
 
+  <!-- Espaço de feedbacks -->
   <div class="feedbacks">
     <p id="feedback"></p>
   </div>
 
+  <!-- Rodapé -->
   <div class="footer">
     <p>&copy; 2025 Raposo EL RPG. Todos os direitos reservados.</p>
   </div>
 
   <script>
     /* ===== Tema claro/escuro ===== */
-function aplicarTema(tema){
-  const isDark = (tema === 'dark');
-  document.body.classList.toggle('dark', isDark);
-  localStorage.setItem('tema', tema);
-      const icon = document.getElementById('themeIcon');
-  const icon = document.getElementById('themeIcon');
-  if(isDark){
-    icon.className = 'fas fa-sun';
-  }else{
-    icon.className = 'fas fa-moon';
+    function aplicarTema(tema){
+      const isDark = (tema === 'dark');
+      document.body.classList.toggle('dark', isDark);
+      localStorage.setItem('tema', tema);
+      
+      // Troca a imagem do header baseado no tema
+      const headerImg = document.getElementById('headerLogo');
+      if (headerImg) {
+        headerImg.src = isDark ? 'raposo-1.webp' : 'raposo-2.webp';
       }
-   const headerImg = document.querySelector('header img');
-  if (headerImg) {
-    headerImg.src = isDark ? 'raposo-1.webp' : 'raposo-2.webp';
-  }
+      
+      // UI do botão de tema
+      const icon = document.getElementById('floatingThemeIcon');
+      if(isDark){
+        icon.className = 'fas fa-sun';
+      }else{
+        icon.className = 'fas fa-moon';
+      }
     }
-
+    
     function toggleTheme(){
       aplicarTema(document.body.classList.contains('dark') ? 'light' : 'dark');
     }
-
-    function initTheme(){
+    
+    // Preferência salva > preferência do sistema > claro
+    (function initTheme(){
       const salvo = localStorage.getItem('tema');
       if(salvo){
         aplicarTema(salvo);
@@ -142,8 +302,8 @@ function aplicarTema(tema){
         const prefereEscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         aplicarTema(prefereEscuro ? 'dark' : 'light');
       }
-      document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    }
+      document.getElementById('floatingThemeToggle').addEventListener('click', toggleTheme);
+    })();
 
     /* ===== Dados / Agenda ===== */
     const sistemas = {
@@ -191,6 +351,7 @@ function aplicarTema(tema){
           </div>
         `;
 
+        // monta o conteúdo imediatamente (sem depender de DOMContentLoaded)
         let conteudo = "";
         sistemas[sistema].forEach(mesa => {
           const proximaData = calcularProximaSessao(mesa.data, mesa.freq);
@@ -203,19 +364,12 @@ function aplicarTema(tema){
             </div>
           `;
         });
-        
-        // Aguarda o DOM ser atualizado antes de acessar o elemento
-        setTimeout(() => {
-          const elemento = document.getElementById(id);
-          if (elemento) {
-            elemento.innerHTML = conteudo;
-          }
-        }, 0);
+        // injeta no container recém-criado
+        document.getElementById(id).innerHTML = conteudo;
       }
     }
 
-    // Define a função no escopo global
-    window.toggleSistema = function(id) {
+    function toggleSistema(id) {
       const conteudo = document.getElementById(id);
       const icone = document.getElementById("icon-" + id);
       if (conteudo.style.display === "block") {
@@ -229,32 +383,40 @@ function aplicarTema(tema){
       }
     }
 
-    // Feedbacks rotativos (CORRIGIDO - vírgulas adicionadas)
+    // Feedbacks rotativos em ordem aleatória
     const feedbacks = [
-      "“Mó divertido esse negócio, vlw!”<br>— Guilherme",
-      "“Agora tô entendendo pq a galera vivi nesse negócio kkk.”<br>— Guilherme, <i>Poatan</i>",
-      "“Tô impressionado com teu profissionalismo. Eu confesso que torcia o nariz com <i>mesa paga</i>, mas mordi a lingua bonito pq estou gostando demais da maneira como tu trabalha.”<br>— Lucas, <i>Karyssa & Sasskya</i>",
-      "“Melhor mesa que joguei até agora. Parabéns pelo nivel de comprometimento e qualidade.”<br>— Allison, <i>Veldora</i>",
-      "“Valeu pela sessão, combate realmente desafiante. A mesa esta massa, desde que vim pros mestre pago não encontrava [algo assim].”<br>— Eduardo, <i>Dagol</i>",
-      "“Você vai curtir o sistema é muito bom e o mestre é sensacional, não tem erro!”<br>— Brenno, <i>sobre Daggerheart</i>",
-      "“Eu curti vc narra legal, faz todos [participarem] de boas.”<br>— Diogo, <i>Inki</i>",
+      "“Mó divertido esse negócio, vlw!”<br>— Guilherme, <i>primeira sessão da vida</i>",
+      "“Agora tô entendendo pq a galera vivi nesse negócio kkk.”<br>— Guilherme, <i>Poatan</i>",
+      "“Tô impressionado com teu profissionalismo. Eu confesso que torcia o nariz com <i>mesa paga</i>, mas mordi a lingua bonito pq estou gostando demais da maneira como tu trabalha.”<br>— Lucas, <i>Karyssa & Sassya</i>",
+      "“Melhor mesa que joguei até agora. Parabéns pelo nivel de comprometimento e qualidade.”<br>— Allison, <i>Veldora</i>",
+      "“Valeu pela sessão, combate realmente desafiante. A mesa esta massa, desde que vim pros mestre pago não encontrava [algo assim].”<br>— Eduardo, <i>Dagol</i>",
+      "“Você vai curtir o sistema é muito bom e o mestre é sensacional, não tem erro!”<br>— Brenno, <i>sobre Daggerheart</i>",
+      "“Eu curti vc narra legal, faz todos [participarem] de boas.”<br>— Diogo, <i>Inki</i>",
       "“Já jogo com ele em duas mesas. O cara é fera mesmo.”<br>— Cleo, <i>vários</i>",
       "“Te agradecer ontem pela sessão. Tu é um bom narrador. Me diverti bastante.”<br>— Adam, <i>após quickstart de Daggerheart</i>"
     ];
-
+    
+    // Embaralhar array de feedbacks
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+    
+    const shuffledFeedbacks = shuffleArray([...feedbacks]);
     let index = 0;
+    
     function mostrarFeedback() {
-      document.getElementById("feedback").innerHTML = feedbacks[index];
-      index = (index + 1) % feedbacks.length;
+      document.getElementById("feedback").innerHTML = shuffledFeedbacks[index];
+      index = (index + 1) % shuffledFeedbacks.length;
     }
 
-    // Inicializa tudo quando o DOM estiver carregado
-    document.addEventListener('DOMContentLoaded', function() {
-      initTheme();
-      renderizarAgenda();
-      mostrarFeedback();
-      setInterval(mostrarFeedback, 10000);
-    });
+    // Inicialização
+    renderizarAgenda();
+    mostrarFeedback();
+    setInterval(mostrarFeedback, 10500);
   </script>
 </body>
 </html>
