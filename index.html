@@ -221,17 +221,22 @@
 
     // Feedbacks rotativos
     const feedbacks = [
-      "“Uma das melhores experiências de RPG que já tive!”",
-      "“Narrativa envolvente e organização impecável.”",
-      "“O mestre sabe equilibrar diversão e desafio.”",
-      "“Cada sessão parece um episódio de série.”"
+      "“Mó divertido esse negócio, vlw!”<br>— Guilherme",
+      "“Agora tô entendendo pq a galera vivi nesse negócio kkk.”<br>— Guilherme, <i>Poatan</i>",
+      "“Tô impressionado com teu profissionalismo. Eu confesso que torcia o nariz com <i>mesa paga</i>, mas mordi a lingua bonito pq estou gostando demais da maneira como tu trabalha..”<br>— Lucas, <i>Karyssa</i>",
+      "“Melhor mesa que joguei até agora. Parabéns pelo nivel de comprometimento e qualidade.”<br>— Allison, <i>Veldora</i>"
+      "“Valeu pela sessão, combate realmente desafiante. A mesa esta massa, desde que vim pros mestre pago não encontrava [algo assim].”<br>— Eduardo, <i>Dagol</i>"
+      "“Você vai curtir o sistema é muito bom e o mestre é sensacional, não tem erro!”<br>— Brenno, <i>sobre Daggerheart</i>"
+      "“Eu curti vc narra legal, faz todos [participarem] de boas.”<br>— Diogo, <i>Inki</i>"
+      "“Já jogo com ele em duas mesas. O cara é fera mesmo.”<br>— Cleo, <i>vários</i>"
+      "“Te agradecer ontem pela sessão. Tu é um bom narrador. Me diverti bastante.”<br>— Adam, <i>após quickstart de Daggerheart</i>"
     ];
     let index = 0;
     function mostrarFeedback() {
       document.getElementById("feedback").innerText = feedbacks[index];
       index = (index + 1) % feedbacks.length;
     }
-    setInterval(mostrarFeedback, 4000);
+    setInterval(mostrarFeedback, 10000);
     mostrarFeedback();
 
     // Render
