@@ -32,20 +32,25 @@
   </a>
 
   <script>
-    // 📌 Lista de mesas (data inicial + frequência)
-    const mesas = [
-      { nome: "Tormenta20 - Fortaleza Sombria", data: "2025-08-20", freq: "quinzenal", vagas: 2 },
-      { nome: "D&D 5e - Maldição de Strahd", data: "2025-08-21", freq: "semanal", vagas: 1 },
-      { nome: "Alien RPG - A Sombra de Thalassa", data: "2025-08-22", freq: "quinzenal", vagas: 3 }
-    ];
+    const sistemas = {
+      "Tormenta20": [
+        { nome: "Fortaleza Sombria", data: "2025-08-20", freq: "quinzenal", vagas: 2 },
+        { nome: "O Segredo de Vectora", data: "2025-08-27", freq: "semanal", vagas: 1 }
+      ],
+      "Daggerheart": [
+        { nome: "Ruínas da Mãe-Matriz", data: "2025-08-22", freq: "quinzenal", vagas: 3 },
+        { nome: "O Coração das Cinzas", data: "2025-08-29", freq: "semanal", vagas: 2 }
+      ],
+      "Alien RPG": [
+        { nome: "A Sombra de Thalassa", data: "2025-08-25", freq: "quinzenal", vagas: 3 }
+      ]
+    };
 
     function calcularProximaSessao(dataInicial, freq) {
       let hoje = new Date();
       let proxima = new Date(dataInicial);
-
       let dias = (freq === "semanal") ? 7 : 14;
 
-      // enquanto a data já passou, soma mais dias
       while (proxima < hoje) {
         proxima.setDate(proxima.getDate() + dias);
       }
@@ -60,17 +65,25 @@
       let agendaDiv = document.getElementById("agenda");
       agendaDiv.innerHTML = "<h2>Próximas Sessões</h2>";
 
-      mesas.forEach(mesa => {
-        let proximaData = calcularProximaSessao(mesa.data, mesa.freq);
-        agendaDiv.innerHTML += `
-          <div class="sessao">
-            <h2>${mesa.nome}</h2>
-            <p><strong>Próxima Sessão:</strong> ${formatarData(proximaData)}</p>
-            <p><strong>Frequência:</strong> ${mesa.freq}</p>
-            <p><strong>Vagas:</strong> ${mesa.vagas} disponíveis</p>
-          </div>
-        `;
-      });
+      // percorre sistemas
+      for (let sistema in sistemas) {
+        agendaDiv.innerHTML += `<div class="sistema"><h2>${sistema}</h2>`;
+
+        // percorre mesas de cada sistema
+        sistemas[sistema].forEach(mesa => {
+          let proximaData = calcularProximaSessao(mesa.data, mesa.freq);
+          agendaDiv.innerHTML += `
+            <div class="sessao">
+              <h3>${mesa.nome}</h3>
+              <p><strong>Próxima Sessão:</strong> ${formatarData(proximaData)}</p>
+              <p><strong>Frequência:</strong> ${mesa.freq}</p>
+              <p><strong>Vagas:</strong> ${mesa.vagas} disponíveis</p>
+            </div>
+          `;
+        });
+
+        agendaDiv.innerHTML += `</div>`;
+      }
     }
 
     renderizarAgenda();
